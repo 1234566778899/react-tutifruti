@@ -1,0 +1,181 @@
+.contenido-room {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../../assets/background.png');
+}
+
+.contenido-room .main {
+    padding: 3% 0px;
+    width: 63%;
+    height: 90%;
+    background-color: #6159C6;
+    border-radius: 10px;
+    border: 2.5px solid #A099FF;
+
+    animation: entrada 1s ease;
+}
+
+@keyframes entrada {
+    0% {
+        transform: translateX(-200%);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.main h3 {
+    font-weight: bolder;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.confi {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0px 20px;
+    border-radius: 13px;
+    height: 400px;
+    gap: 5px;
+
+}
+
+.confi>div {
+    border-radius: 10px;
+    background-color: #433DA7;
+}
+
+.items {
+    height: 285px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.item {
+    padding: 2px 20px;
+    margin-right: 5px;
+    display: inline-block;
+    flex-wrap: wrap;
+    font-size: 15px;
+    align-items: center;
+    border-radius: 20px;
+    background-color: #D2C7F9;
+}
+
+.item span {
+    margin-right: 10px;
+    color: #322B99;
+}
+
+.btn-crear {
+    width: 208px;
+    padding: 22px;
+    background: none;
+    border: none;
+    background-image: url('../../assets/sprite.png');
+    background-size: cover;
+    padding-left: 40px;
+    color: #332D7A;
+    font-weight: bolder;
+}
+
+.btn-crear:hover {
+    filter: brightness(1.1);
+}
+
+.categorias {
+    padding: 20px 0px;
+}
+
+.agregar-form {
+    padding: 0px 10px;
+    display: flex;
+}
+
+.agregar-form input {
+    width: 50%;
+    margin: 0px 20px;
+    background: none;
+    outline: none;
+    padding: 5px 0px;
+    border: none;
+    border-bottom: 1px solid #a7a3dd;
+    color: white;
+}
+
+.agregar-form input:focus {
+    border-bottom: 1px solid #ffffff;
+}
+
+.agregar-form input::placeholder {
+    color: #baa5d3;
+}
+
+.codigos {
+    padding: 20px 20px;
+}
+
+.codigos input {
+    outline: none;
+    background: none;
+    border: none;
+    color: white;
+    border-bottom: 1px solid white;
+}
+
+.categorias p {
+    font-weight: bold;
+}
+
+.turquesa {
+    color: #29D3B2;
+}
+
+.btn-adicionar {
+    background: none;
+    background-image: url('../../assets/sprite2.png');
+    padding: 0px 5px;
+    width: 110px;
+    color: white;
+    background-size: contain;
+    border: none;
+    transition: filter 0.5s ease;
+}
+
+.btn-adicionar:hover {
+    filter: brightness(1.5);
+}
+
+.letras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.letras>div {
+
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+
+}
+
+.letras .activo {
+    color: #433DA7;
+    background-color: #DCD2F9;
+}
+
+.letras .desactivo {
+    color: #DCD2F9;
+    background: none;
+    border: 2px solid #DCD2F9;
+}
