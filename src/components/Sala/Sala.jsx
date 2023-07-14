@@ -35,7 +35,7 @@ export const Sala = () => {
   const [respuestas, setRespuestas] = useState([])
   const [letras, setletras] = useState(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'X', 'Y', 'Z']);
   useEffect(() => {
-    const newSocket = io('https://server-tutifruti-ordazhoyos2001-gmailcom.vercel.app/' + codigo);
+    const newSocket = io('https://server-tutifruti.vercel.app/' + codigo);
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
