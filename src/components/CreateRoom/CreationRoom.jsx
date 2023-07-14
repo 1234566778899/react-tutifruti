@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import './create.css'
-const socket = io('https://server-tutifruti.vercel.app/')
+const socket = io('https://server-tutifruti-ordazhoyos2001-gmailcom.vercel.app/')
 
 export const CreationRoom = () => {
 
