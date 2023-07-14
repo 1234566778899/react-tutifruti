@@ -68,7 +68,6 @@
 
 .sala-contenido {
     width: 63%;
-    height: 90%;
     background-color: #6159C6;
     border-radius: 10px;
     border: 2.5px solid #A099FF;
@@ -76,10 +75,9 @@
 
 .sala-box {
     margin-top: 30px;
+    margin-bottom: 10px;
     display: grid;
     grid-template-columns: 22% 56% 22%;
-    ;
-    height: 70%;
 }
 
 .sala-encabezado {
@@ -152,6 +150,8 @@
     background-color: #312B99;
 }
 
+
+
 .sala-btn {
     width: 208px;
     padding: 22px;
@@ -222,11 +222,6 @@
 .sala-form-chat input::placeholder {
     color: #b5a3bb;
 }
-
-.sala-mesa .box {
-    height: 80%;
-}
-
 
 .sala-mesa .box h4 {
     font-weight: bolder;
@@ -389,9 +384,11 @@
     0% {
         background-color: #D2C7F9;
     }
+
     50% {
         background-color: #c7b9fb;
     }
+
     0% {
         background-color: #D2C7F9;
     }
@@ -406,4 +403,46 @@
     color: white;
     background-color: #EE1B24;
 
+}
+
+
+@media screen and (max-width:720px) {
+    .toggle {
+        width: 100%;
+        margin: 10px;
+    }
+
+    .sala-container {
+        padding: 10px;
+        height: auto;
+    }
+    .sala-contenido {
+        margin: none;
+        width: 100%;
+        height: 100%;
+        margin: 20px;
+    }
+    .sala-mesa .box p{
+        padding: 20px;
+    }
+    .sala-box {
+        width: auto;
+        height: auto;
+        grid-template-columns: 100%;
+    }
+    .sala-mesa {
+        width: 100%;
+    }
+    .sala-chat {
+        display: none;
+    }
+    .box-resultados {
+        overflow-x: scroll;
+    }
+    .tabla-resultado{
+        overflow-x: scroll;
+    }
+    .sala-participantes{
+        display: none;
+    }
 }

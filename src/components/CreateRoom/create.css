@@ -9,11 +9,9 @@
 .contenido-room .main {
     padding: 3% 0px;
     width: 63%;
-    height: 90%;
     background-color: #6159C6;
     border-radius: 10px;
     border: 2.5px solid #A099FF;
-
     animation: entrada 1s ease;
 }
 
@@ -38,7 +36,6 @@
     grid-template-columns: repeat(3, 1fr);
     margin: 0px 20px;
     border-radius: 13px;
-    height: 400px;
     gap: 5px;
 
 }
@@ -46,6 +43,22 @@
 .confi>div {
     border-radius: 10px;
     background-color: #433DA7;
+}
+
+@media screen and (max-width:720px) {
+    .contenido-room{
+        height: auto;
+    }
+    .contenido-room .main {
+        animation: none;
+        margin: 10px;
+        width: 100%;
+        height: auto;
+    }
+
+    .confi {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 
 .items {

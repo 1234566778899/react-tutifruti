@@ -37,8 +37,10 @@ export const CreationRoom = () => {
         navigate(`/sala/${codigo}`)
     }
     const agregarCategoria = () => {
-        setcategotias([...categorias, item]);
-        setitem('')
+        if (item.trim().length >= 3) {
+            setcategotias([...categorias, item]);
+            setitem('')
+        }
     }
     const eliminarCategoria = (category) => {
         if (categorias == "") {

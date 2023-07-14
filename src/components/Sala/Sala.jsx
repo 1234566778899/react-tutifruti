@@ -24,6 +24,7 @@ export const Sala = () => {
   const [click, setClick] = useState(false);
   const [clickCorregir, setclickCorregir] = useState(false);
   const [data, setdata] = useState(null);
+  const [clickDetener, setClickDetener] = useState(false);
   const generarId = () => {
     let cadena = '';
     for (let i = 0; i < 10; i++) {
@@ -31,12 +32,8 @@ export const Sala = () => {
     }
     return cadena;
   }
-
-
   const [respuestas, setRespuestas] = useState([])
   const [letras, setletras] = useState(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'X', 'Y', 'Z']);
-
-
   useEffect(() => {
     const newSocket = io('http://localhost:4000/' + codigo);
     setSocket(newSocket);
@@ -45,15 +42,15 @@ export const Sala = () => {
     }
   }, [codigo]);
 
-  const activarReiniciar = () => {
-    socket.emit('reiniciar', 'data');
-  }
+
   const enviarMensaje = () => {
-    socket.emit('chat-message', {
-      user: nombre,
-      mensaje: textMessage
-    });
-    setTextMessage('')
+    if (textMessage.trim().length >= 1) {
+      socket.emit('chat-message', {
+        user: nombre,
+        mensaje: textMessage
+      });
+      setTextMessage('')
+    }
   }
   const elegirLetra = (num) => {
     let i = 0;
@@ -69,16 +66,28 @@ export const Sala = () => {
   }
 
   const iniciarJuego = () => {
-    socket.emit('empezar-juego', 'empezar');
+    if (esAdmin) {
+      if (letra == '?') {
+        alert('Debes seleccionar una letra');
+      } else {
+        socket.emit('empezar-juego', 'empezar');
+      }
+    } else {
+      alert('Usted no tiene permiso para iniciar el juego');
+    }
   }
   const enviarNombre = () => {
-    entradas['usuario'] = nombre;
-    socket.emit('enviar-nombre', nombre);
-    setVentaNombre('none')
+    if (nombre.trim().length >= 3) {
+      entradas['usuario'] = nombre;
+      socket.emit('enviar-nombre', nombre);
+      setVentaNombre('none')
+    }
   }
   const girarLetra = () => {
     socket.emit('girar-letra', Math.floor(Math.random() * letras.length));
   }
+
+
   useEffect(() => {
 
     if (socket) {
@@ -88,7 +97,6 @@ export const Sala = () => {
 
       });
       socket.on('enviar-usuarios', data => {
-        if (data.usuarios[0].id == socket.id) setEsAdmin(true);
         setUsuarios(data.usuarios);
         setCategorias(data.categorias);
         for (let i = 0; i < data.categorias.length; i++) {
@@ -101,6 +109,7 @@ export const Sala = () => {
 
       });
       socket.on('detener-juego', data => {
+        setClickDetener(true);
         detenerJuego();
       });
       socket.on('start', data => {
@@ -117,6 +126,8 @@ export const Sala = () => {
         elegirLetra(data);
       })
       socket.on('reiniciar-juego', data => {
+        setLetra('?');
+        setUsuarios(data);
         iniciarNuevamente();
       })
       socket.on('corregir-respuesta', data => {
@@ -139,11 +150,27 @@ export const Sala = () => {
     };
   }, [socket]);
 
+  useEffect(() => {
+    if (usuarios.length >= 1) {
+      if (usuarios[0].id == socket.id) setEsAdmin(true);
+    }
+  }, [usuarios]);
+  useEffect(() => {
+
+    if (clickDetener) {
+      for (let cate of categorias) {
+        setEntradas(prev => ({ ...prev, [cate]: { ...prev[cate], respuesta: '', correcto: null } }))
+      }
+      setClickDetener(false);
+    }
+  }, [clickDetener, entradas]);
+
   const corregirRespuesta = () => {
     const update = respuestas.map(x =>
       x[data.tema].id == data.id ? { ...x, [data.tema]: { ...x[data.tema], correcto: !x[data.tema].correcto } } : x);
     setRespuestas(update);
   }
+
   useEffect(() => {
     if (clickCorregir) {
       corregirRespuesta();
@@ -170,6 +197,19 @@ export const Sala = () => {
   const empezarJugar = () => {
     setPantallas([false, true, false])
   }
+  const findByUser = (user) => {
+    let _aux = usuarios.find(x => x.nombre == user);
+    return { id: _aux.id, puntaje: _aux.puntaje };
+  }
+  const activarReiniciar = () => {
+
+    if (esAdmin) {
+      const update = respuestas.map(x => ({ id: findByUser(x['usuario']).id, nombre: x['usuario'], puntaje: obtenerPuntaje(x) + findByUser(x['usuario']).puntaje }))
+      socket.emit('reiniciar', update);
+    } else {
+      alert('Solo el admin puede iniciar el juego');
+    }
+  }
   const obtenerPuntaje = (rpta) => {
     let cont = 0;
     for (let tema in rpta) {
@@ -188,7 +228,7 @@ export const Sala = () => {
         <div className="toggle" >
           <h4 >SALA {codigo}</h4>
           <div className='text-center mt-3'>
-            <img src={linkImage} alt="" />
+            <img src={linkImage} alt="" className='img-fluid'/>
           </div>
           <br />
           <p>Escribe tu nombre</p>
@@ -226,7 +266,7 @@ export const Sala = () => {
                     </div>
                     <div className='ps-2 pt-1'>
                       <span className='nombre'>{x.nombre}</span><br />
-                      <span className='puntos'>0 ptos</span>
+                      <span className='puntos'>{x.puntaje} ptos</span>
                     </div>
                   </div>))
               }
@@ -234,7 +274,7 @@ export const Sala = () => {
             <div className='sala-mesa'>
               {pantallas[0] ? (<div className='box text-center'>
                 <h4>ESPERANDO</h4>
-                <img src={imgEsperando} alt="img" />
+                <img src={imgEsperando} alt="img" className='img-fluid' />
                 {
                   esAdmin ? (<p>USTED ES EL ADMINISTRADOR DE LA SALA. INICIE EL JUEGO CUENDO ESTE LISTO</p>) : (<p>DEBE ESPERAR A QUE EL ADMINISTRADOR INICIE EL JUEGO</p>)
                 }

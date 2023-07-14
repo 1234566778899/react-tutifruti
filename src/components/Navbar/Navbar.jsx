@@ -10,10 +10,10 @@ export const NavbarComponent = () => {
                 <div className="enlaces">
                     <ul className='mt-3'>
                         <li>¿CÓMO FUNCIONA?</li>
-                        <li>APP</li>
+                        {/* <li>APP</li>
                         <li>HISTORIA    </li>
                         <li>MAS JUEGOS</li>
-                        <li>ASSETS</li>
+                        <li>ASSETS</li> */}
                     </ul>
                 </div>
             </div>
