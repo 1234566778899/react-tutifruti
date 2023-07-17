@@ -12,7 +12,6 @@ export const Sala = () => {
   const [ventaNombre, setVentaNombre] = useState('flex')
   const [categorias, setCategorias] = useState(['Nombre', 'Apellido', 'Pais', 'Fruta', 'Animal', 'Objeto'])
   const [pantallas, setPantallas] = useState([true, false, false])
-  // 'Nombre', 'Apellido', 'Animal', 'Fruta', 'Pais', 'Color', 'Capital', 'Celebridad', 'Objeto'
   const [mensajes, setmensajes] = useState([])
   const [textMessage, setTextMessage] = useState('');
   const [usuarios, setUsuarios] = useState([]);
@@ -36,6 +35,7 @@ export const Sala = () => {
   const [letras, setletras] = useState(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'X', 'Y', 'Z']);
   useEffect(() => {
     const newSocket = io('https://server-tutifruti.vercel.app/' + codigo);
+    //const newSocket = io('http://localhost:4000/' + codigo);
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
@@ -228,7 +228,7 @@ export const Sala = () => {
         <div className="toggle" >
           <h4 >SALA {codigo}</h4>
           <div className='text-center mt-3'>
-            <img src={linkImage} alt="" className='img-fluid'/>
+            <img src={linkImage} alt="" className='img-fluid' />
           </div>
           <br />
           <p>Escribe tu nombre</p>
