@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import './create.css'
- const socket = io('https://server-tutifruti.vercel.app/')
-//const socket = io('http://localhost:4000/')
+//const socket = io('https://server-tutifruti.vercel.app/')
+const socket = io('http://localhost:4000/')
 
 export const CreationRoom = () => {
 

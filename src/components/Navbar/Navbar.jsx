@@ -5,7 +5,7 @@ export const NavbarComponent = () => {
         <nav>
             <div className='contenido'>
                 <div className="logo pt-3">
-                    <h2>Tutti Frutti v2</h2>
+                    <h2>Tutti Frutti v3</h2>
                 </div>
                 <div className="enlaces">
                     <ul className='mt-3'>
