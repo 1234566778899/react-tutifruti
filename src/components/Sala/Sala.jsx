@@ -34,8 +34,8 @@ export const Sala = () => {
   const [respuestas, setRespuestas] = useState([])
   const [letras, setletras] = useState(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'X', 'Y', 'Z']);
   useEffect(() => {
-    //const newSocket = io('https://server-tuti-564ab34fd292.herokuapp.com/' + codigo);
-    const newSocket = io('http://localhost:4000/' + codigo);
+    const newSocket = io('https://server-tutifruti-online-4485aaee0663.herokuapp.com/' + codigo);
+    //const newSocket = io('http://localhost:4000/' + codigo);
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
