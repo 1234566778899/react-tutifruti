@@ -65,6 +65,7 @@
     height: 285px;
     overflow-y: auto;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .item {
@@ -173,6 +174,7 @@
 
     font-weight: bold;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin: 5px 12px;

@@ -318,48 +318,7 @@
     outline: 3px solid #F0AE4B;
 }
 
-.tabla-resultado td {
-    height: 40px;
-    text-transform: uppercase;
-    border: 1px solid #8383da;
-    text-align: center;
-}
 
-.box-resultados {
-    padding: 0px 10px;
-    height: 400px;
-    overflow: auto;
-}
-
-.box-resultados::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-.box-resultados::-webkit-scrollbar-track {
-    background: #1B1772;
-}
-
-.box-resultados::-webkit-scrollbar-thumb {
-    background-color: #8383da;
-    border-radius: 5px;
-}
-
-.box-resultados h4 {
-    text-align: center;
-    color: #0a0746;
-}
-
-.tabla-resultado {
-    margin-bottom: 20px;
-}
-
-.tabla-resultado td span {
-    font-size: 13px;
-    width: 100%;
-    margin: 5px 3px;
-    padding: 6px 15px;
-}
 
 .resto {
     color: #40405E;
@@ -405,6 +364,61 @@
 
 }
 
+.modal {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+.box-resultados {
+    border: 2px solid #A099FF;
+    background-color: #6159C6;
+    border-radius: 10px;
+    padding: 10px 10px;
+    height: 400px;
+    overflow: auto;
+    color: white;
+}
+.box-resultados h4 {
+    text-align: center; 
+    color: #FFC058;
+    font-weight: bolder;
+}
+.box-resultados::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.box-resultados::-webkit-scrollbar-track {
+    background: #1B1772;
+}
+
+.box-resultados::-webkit-scrollbar-thumb {
+    background-color: #8383da;
+    border-radius: 5px;
+}
+
+.tabla-resultado {
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.tabla-resultado td{
+    border: 1px solid white;
+    padding: 5px;
+}
+.tabla-resultado td span {
+    font-size: 13px;
+    width: 100%;
+    margin: 5px 5px;
+    padding: 6px 15px;
+}
 
 @media screen and (max-width:720px) {
     .toggle {
@@ -416,33 +430,41 @@
         padding: 10px;
         height: auto;
     }
+
     .sala-contenido {
         margin: none;
         width: 100%;
         height: 100%;
         margin: 20px;
     }
-    .sala-mesa .box p{
+
+    .sala-mesa .box p {
         padding: 20px;
     }
+
     .sala-box {
         width: auto;
         height: auto;
         grid-template-columns: 100%;
     }
+
     .sala-mesa {
         width: 100%;
     }
+
     .sala-chat {
         display: none;
     }
+
     .box-resultados {
         overflow-x: scroll;
     }
-    .tabla-resultado{
+
+    .tabla-resultado {
         overflow-x: scroll;
     }
-    .sala-participantes{
+
+    .sala-participantes {
         display: none;
     }
 }
