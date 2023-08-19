@@ -34,8 +34,8 @@ export const Sala = () => {
   const [respuestas, setRespuestas] = useState([])
   const [letras, setletras] = useState(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'V', 'X', 'Y', 'Z']);
   useEffect(() => {
-    const newSocket = io('https://server-tuti-564ab34fd292.herokuapp.com/' + codigo);
-    //const newSocket = io('http://localhost:4000/' + codigo);
+    //const newSocket = io('https://server-tuti-564ab34fd292.herokuapp.com/' + codigo);
+    const newSocket = io('http://localhost:4000/' + codigo);
     setSocket(newSocket);
     return () => {
       newSocket.disconnect();
@@ -294,45 +294,10 @@ export const Sala = () => {
                   }
                 </div>
               </div>) : ''}
-              {pantallas[2] ? (<div className='box-resultados'>
-                <h4 className='text-light'>Resultados</h4>
-                <table className='tabla-resultado'>
-                  <thead>
-                    <tr>
-                      <td ><span className='importante'>USUARIO</span></td>
-                      {
-                        categorias.map(x => (<td key={generarId()}><span className='importante'>{x}</span></td>))
-                      }
-                      <td ><span className='importante'>PUNTAJE</span></td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      respuestas.map((respuesta, index) => (
-                        <tr key={generarId()}>
-                          {
-                            Object.keys(respuesta).map((x) => (
-                              <td key={generarId()}>
-                                {
-                                  x == 'usuario' ? (<span className='importante'> {respuesta[x]}</span>) :
-                                    (<span onClick={() => activarCorreccion(respuesta[x].id, x)} className={respuesta[x].correcto == null ? 'por-corregir resto' : (respuesta[x].correcto ? 'correcto resto' : 'incorrecto resto')}>{respuesta[x].respuesta}</span>)
-                                }
-                              </td>
-                            ))
 
-                          }
-                          <td><span className='importante'>{obtenerPuntaje(respuesta)}</span></td>
-                        </tr>
-                      ))
-
-                    }
-                  </tbody>
-                </table>
-              </div>) : ''}
               <div className='text-center mt-2'>
                 {pantallas[0] ? (<button className='sala-btn' onClick={() => iniciarJuego()}>INICIAR</button>) : ''}
                 {pantallas[1] ? (<button className='sala-btn' onClick={() => detener()}>DETENER</button>) : ''}
-                {pantallas[2] ? (<button className='sala-btn' onClick={() => activarReiniciar()}>NUEVO JUEGO</button>) : ''}
               </div>
             </div>
             <div className='sala-chat'>
@@ -349,14 +314,58 @@ export const Sala = () => {
 
               </div>
               <div className="sala-form-chat">
-                <input type="text" value={textMessage} onChange={(e) => setTextMessage(e.target.value)} placeholder='Escribe aqui..' />
-                <button onClick={() => enviarMensaje()}>    </button>
+                <form onSubmit={(e) => { enviarMensaje(); e.preventDefault() }}>
+                  <input type="text" value={textMessage} onChange={(e) => setTextMessage(e.target.value)} placeholder='Escribe aqui..' />
+                  <button type='submit'>    </button>
+                </form>
               </div>
             </div>
           </div>
 
         </div>
       </div>
+
+
+      {pantallas[2] ? (<div className="modal">
+        <div className='box-resultados'>
+          <h4>RESULTADOS</h4>
+          <table className='tabla-resultado'>
+            <thead>
+              <tr>
+                <td ><span className='importante'>USUARIO</span></td>
+                {
+                  categorias.map(x => (<td key={generarId()}><span className='importante'>{x}</span></td>))
+                }
+                <td ><span className='importante'>PUNTAJE</span></td>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                respuestas.map((respuesta, index) => (
+                  <tr key={generarId()}>
+                    {
+                      Object.keys(respuesta).map((x) => (
+                        <td key={generarId()}>
+                          {
+                            x == 'usuario' ? (<span className='importante'> {respuesta[x]}</span>) :
+                              (<span onClick={() => activarCorreccion(respuesta[x].id, x)} className={respuesta[x].correcto == null ? 'por-corregir resto' : (respuesta[x].correcto ? 'correcto resto' : 'incorrecto resto')}>{respuesta[x].respuesta}</span>)
+                          }
+                        </td>
+                      ))
+
+                    }
+                    <td><span className='importante'>{obtenerPuntaje(respuesta)}</span></td>
+                  </tr>
+                ))
+
+              }
+            </tbody>
+          </table>
+          <div className="text-center">
+            {pantallas[2] ? (<button className='sala-btn' onClick={() => activarReiniciar()}>NUEVO JUEGO</button>) : ''}
+          </div>
+        </div>
+      </div>) : ''}
     </>
 
   )
